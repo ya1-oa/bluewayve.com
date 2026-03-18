@@ -1,7 +1,2 @@
 include:
   - .well-known
-
-kramdown:
-  input: GFM
-
-plugins: []
