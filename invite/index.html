@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join BlueWayve</title>
+    <link rel="stylesheet" href="/styles.css">
+    <!-- Apple Smart App Banner — shows a native "Open" banner if app is installed -->
+    <meta name="apple-itunes-app" content="app-id=YOUR_APP_STORE_ID">
+    <style>
+        .redirect-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667EEA 0%, #4A90E2 100%);
+            text-align: center;
+            padding: 2rem;
+        }
+        .redirect-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .redirect-card h1 {
+            color: #2C3E50;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+        .redirect-card p {
+            color: #6C757D;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .app-store-btn {
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .app-store-btn img {
+            height: 52px;
+            width: auto;
+        }
+        .wave-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .redirecting {
+            color: #4A90E2;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-page">
+        <div class="redirect-card">
+            <span class="wave-emoji">🌊</span>
+            <h1>You've been invited!</h1>
+            <p>Your friend wants to be your Voting Duo on BlueWayve. Download the app to accept and vote together this November.</p>
+            <a href="https://apps.apple.com/app/id YOUR_APP_STORE_ID" class="app-store-btn">
+                <img src="/images/app-store-badge.png" alt="Download on the App Store">
+            </a>
+            <p class="redirecting" id="redirect-msg"></p>
+        </div>
+    </div>
+    <script>
+        // Try to open the app via custom scheme first
+        // Extract the invite ID from the path: /invite/{uuid}
+        const pathParts = window.location.pathname.split('/');
+        const inviteId = pathParts[pathParts.length - 1];
+
+        if (inviteId && inviteId.length > 10) {
+            // Try the custom URL scheme as a fallback
+            const appUrl = 'bluewayve://invite/' + inviteId;
+            const appStoreUrl = 'https://apps.apple.com/app/idYOUR_APP_STORE_ID';
+
+            // Attempt to open app; if it fails after 2.5s, stay on page (App Store link is visible)
+            let redirected = false;
+            window.location.href = appUrl;
+            setTimeout(function() {
+                if (!redirected && document.visibilityState !== 'hidden') {
+                    document.getElementById('redirect-msg').textContent =
+                        'App not installed? Download above to join the duo.';
+                }
+            }, 2500);
+
+            window.addEventListener('visibilitychange', function() {
+                if (document.visibilityState === 'hidden') redirected = true;
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join BlueWayve</title>
+    <meta name="apple-itunes-app" content="app-id=YOUR_APP_STORE_ID">
+    <style>
+        /* same styles as invite/index.html above */
+        .redirect-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667EEA 0%, #4A90E2 100%);
+            text-align: center;
+            padding: 2rem;
+        }
+        .redirect-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .redirect-card h1 { color: #2C3E50; font-size: 1.75rem; margin-bottom: 1rem; }
+        .redirect-card p { color: #6C757D; margin-bottom: 2rem; line-height: 1.6; }
+        .app-store-btn { display: inline-block; margin-bottom: 1rem; }
+        .app-store-btn img { height: 52px; width: auto; }
+        .wave-emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
+    </style>
+</head>
+<body>
+    <div class="redirect-page">
+        <div class="redirect-card">
+            <span class="wave-emoji">🌊🇺🇸</span>
+            <h1>Join BlueWayve!</h1>
+            <p>Make voting social. Connect with your friend as a Voting Duo and commit to voting together this November.</p>
+            <a href="https://apps.apple.com/app/idYOUR_APP_STORE_ID" class="app-store-btn">
+                <img src="/images/app-store-badge.png" alt="Download on the App Store">
+            </a>
+        </div>
+    </div>
+    <script>
+        // Pass the referrer query params through to the App Store link if desired
+        const params = new URLSearchParams(window.location.search);
+        const referrer = params.get('referrer');
+        const name = params.get('name');
+
+        if (referrer) {
+            // Attempt to open the app directly via custom scheme
+            window.location.href = 'bluewayve://app/invite?referrer=' + referrer + (name ? '&name=' + encodeURIComponent(name) : '');
+        }
+    </script>
+</body>
+</html>
