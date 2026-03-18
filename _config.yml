@@ -1,7 +1,7 @@
 include:
   - .well-known
 
-plugins: []
+kramdown:
+  input: GFM
 
-exclude:
-  - .DS_Store
+plugins: []
