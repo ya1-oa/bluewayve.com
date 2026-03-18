@@ -1,5 +1,1 @@
----
-layout: null
-permalink: /.well-known/apple-app-site-association
----
 {"applinks":{"apps":[],"details":[{"appID":"M8HSEJZCBF.www.bluewayve.com.AppBluewayve","paths":["/invite/*","/app/invite*","/reset-password*"]}]}}
