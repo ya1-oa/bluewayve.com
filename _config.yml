@@ -1,2 +1,7 @@
 include:
   - .well-known
+
+plugins: []
+
+exclude:
+  - .DS_Store
